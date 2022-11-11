@@ -2,6 +2,13 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import addItemRoute from "./routes/addItem.js";
+import getItemRoute from "./routes/getItems.js";
+import getItemByIdRoute from "./routes/getItemById.js";
+import updateItemRoute from "./routes/updateItem.js";
+import deleteItemRoute from "./routes/deleteItem.js";
+import getTokenRoute from "./routes/getToken.js";
+
 dotenv.config();
 
 const app = express();
@@ -21,9 +28,15 @@ connect().catch(console.dir);
 // middlewares
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use("/inventory/items/", addItemRoute);
+app.use("/inventory/items/", getItemRoute);
+app.use("/inventory/items/", getItemByIdRoute);
+app.use("/inventory/items/", updateItemRoute);
+app.use("/inventory/items/", deleteItemRoute);
+app.use("/inventory/token/", getTokenRoute);
 
-//api
+//routes
 
 app.get("/", (req, res) => {
   res.send("Inventory management server");
