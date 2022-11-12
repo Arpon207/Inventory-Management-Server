@@ -10,7 +10,7 @@ router.delete("/delete", async (req, res) => {
     const response = await item.findByIdAndDelete({ _id: req.query.itemId });
     res.status(200).send(response);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 });
 

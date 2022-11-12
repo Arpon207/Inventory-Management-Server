@@ -20,7 +20,7 @@ const upload = async (req, res, next) => {
     req.img = { url: response.secure_url, id: response.public_id };
     next();
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
